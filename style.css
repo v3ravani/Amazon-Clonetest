@@ -1,0 +1,81 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+header{
+    height: 60px;
+    background-color: #0f1111;
+    display: flex;
+    align-items: center;
+}
+
+.border{
+    border: 1px solid transparent;
+}
+.border:hover{
+    border: 1px solid white;
+}
+.logo{
+    margin: 1px;
+    padding: 1px 8px 0px 6px;
+}
+.logo img:hover{
+   
+    border: 1px solid white;
+}
+.location{
+    display: flex;
+    height: 50px;
+    align-items: center;
+    margin: 5px 2px 5px 0px;
+    padding: 0px 9px;
+}
+.location ion-icon{
+    color: white;
+    font-size: 18px;
+   margin: 8px 0px 0px;
+}
+.Deliver_to{
+    font-size: 12px;
+    color: rgb(255, 255, 255);
+    
+}
+.India{
+    font-size: 14px;
+    color: white;
+}
+.location:hover{
+    border: 1px solid white;
+}
+.searchbar{
+    display: flex;
+}
+select{
+    height: 40px;
+    width: 52px;
+    background-color: #E6E6E6;
+    color: #0f1111;
+    font-size: 14px;
+    padding-left: 5px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+.search input{
+    height: 40px;
+    width: 400px;
+    padding: 7px 10px 10px 0px;
+    font-size: 14px;
+}
+.searchbutton{
+    color: black;
+    background-color: #febd68;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    height: 40px;
+    width: 45px;
+}
+.searchbutton ion-icon{
+  font-size: 1.8rem;
+ padding: 5px 5px 5px 5px;
+}
