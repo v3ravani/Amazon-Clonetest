@@ -8,6 +8,7 @@ header{
     background-color: #0f1111;
     display: flex;
     align-items: center;
+    justify-content: space-evenly;
 }
 
 .border{
@@ -30,6 +31,7 @@ header{
     align-items: center;
     margin: 5px 2px 5px 0px;
     padding: 0px 9px;
+    margin-right: 10px;
 }
 .location ion-icon{
     color: white;
@@ -51,6 +53,10 @@ header{
 .searchbar{
     display: flex;
 }
+.searchbar:hover{
+    border: 3px solid #febd68;
+    border-radius: 8px;
+}
 select{
     height: 40px;
     width: 52px;
@@ -58,24 +64,62 @@ select{
     color: #0f1111;
     font-size: 14px;
     padding-left: 5px;
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border: none;
 }
 .search input{
     height: 40px;
-    width: 400px;
+    width: 700px;
     padding: 7px 10px 10px 0px;
     font-size: 14px;
+    border: none;
 }
 .searchbutton{
     color: black;
     background-color: #febd68;
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
     height: 40px;
     width: 45px;
 }
 .searchbutton ion-icon{
   font-size: 1.8rem;
  padding: 5px 5px 5px 5px;
+}
+.sign-in{
+    height: 50px;
+    width: 115px;
+    margin-left: 10px;
+    padding-left: 13px;
+}
+.rando{
+        height: 50px;
+        width: 80px;
+        margin-left: 10px;
+        padding-left: 13px;
+    
+}
+.hello{
+    color: #D6D6D6;
+    font-size: 12px;
+    margin-top: 9px;
+}
+.accounts{
+    color: #D6D6D6;
+    font-size: 14px;
+}
+.cart{
+    color: #D6D6D6;
+    height: 50px;
+    width: 84px;
+    display: flex;
+}
+.cart ion-icon{
+    font-size: 3rem;
+}
+.cart p{
+    font-size: 16px;
+    align-self:flex-end;
+    padding-bottom: 10px;
 }
