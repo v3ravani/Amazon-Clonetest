@@ -280,9 +280,11 @@ select {
 .contain{
     display: grid;
     grid-template-columns: repeat(2,1fr);
+    gap: 10px;
 }
 #box1 img{
-    width:150px ;
+    height: 110px;
+    width: 140px;
 }
 .names p{
     font-size: 12px;
@@ -290,14 +292,22 @@ select {
     margin-left: 20px;
     font-weight: 530;
     color: #0f1111;
-    margin-bottom: 45px;
+    margin-bottom: 25px;
 }
-.box a{
+
+.anchor a{
     color: #2162a1;
     font-size: 13px;
-}
-.anchor{
-    margin-bottom: 15px;
-    margin-left: 15px;
     font-weight: 545;
+    text-decoration: none;
+    margin-left: 15px;
+}
+
+.crop-image{
+        width: 290px; 
+        height: 300px; 
+        object-fit: cover; 
+}
+#box2 img{
+    margin-left: 20px;
 }
