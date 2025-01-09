@@ -277,16 +277,19 @@ select {
     color: #0f1111;
     margin: 20px 20px 20px 20px;
 }
-.contain{
+
+.contain {
     display: grid;
-    grid-template-columns: repeat(2,1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 10px;
 }
-#box1 img{
+
+#box1 img {
     height: 110px;
     width: 140px;
 }
-.names p{
+
+.names p {
     font-size: 12px;
     margin-top: 5px;
     margin-left: 20px;
@@ -295,7 +298,7 @@ select {
     margin-bottom: 25px;
 }
 
-.anchor a{
+.anchor a {
     color: #2162a1;
     font-size: 13px;
     font-weight: 545;
@@ -303,57 +306,206 @@ select {
     margin-left: 15px;
 }
 
-.crop-image{
-        width: 290px; 
-        height: 300px; 
-        object-fit: cover; 
+.crop-image {
+    width: 290px;
+    height: 300px;
+    object-fit: cover;
 }
-.crop-image-cooker{
+
+.crop-image-cooker {
     height: 110px;
     width: 140px;
-    object-fit: cover; 
+    object-fit: cover;
 }
-#box2 img{
+
+#box2 img {
     margin-left: 20px;
 }
-.backToTop{
+
+.backToTop {
     height: 50px;
     width: 100%;
     background-color: #37475a;
     align-content: center;
 }
-.backToTop h5{
+
+.backToTop h5 {
     text-align: center;
     color: #ffffff;
     font-size: 13px;
     font-weight: 450;
 }
-.panel2{
+
+.panel2 {
     height: 400px;
     width: 100%;
     background-color: #222f3d;
 }
-.cont{
+
+.cont {
     display: flex;
     margin-left: 150px;
     margin-right: 150px;
 }
-.panel2 h4{
+
+.panel2 h4 {
     display: block;
     color: #ffffff;
     font-size: 16px;
 }
-ul{
+
+ul {
     display: block;
     color: #DDDDDD;
 }
-.panel21 ul li{
+
+.panel21 ul li {
     font-size: 14px;
     margin: 10px;
 }
-.panel21 ul li:hover{
+
+.panel21 ul li:hover {
     text-decoration: underline;
 }
-.panel21{
+
+.panel21 {
     margin: 50px;
+}
+
+.panel3 {
+    height: 90px;
+    width: 100%;
+    background-color: #222f3d;
+    border-top: 0.1px inset #DDDDDD;
+}
+
+.panel3 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.footer-logo {
+    align-items: center;
+    justify-content: center;
+    padding-top: 10px;
+    margin-right: 80px;
+}
+
+.languages {
+    margin-right: 10px;
+}
+
+.languages select {
+    width: 100px;
+    background-color: transparent;
+    color: #DDDDDD;
+    border: 1px solid rgb(255, 255, 255);
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+    font-size: 13px;
+}
+
+.languages option {
+    background-color: #ffffff;
+    color: black;
+}
+
+.currency {
+    height: 35px;
+    width: 150px;
+    border: 1px solid white;
+    border-radius: 5px;
+    align-content: center;
+    padding-left: 20px;
+}
+
+.currency {
+    margin-right: 10px;
+}
+
+.currency a {
+    font-size: 13px;
+    color: #DDDDDD;
+    text-decoration: none;
+}
+
+.web-based {
+    height: 35px;
+    width: 100px;
+    border: 1px solid white;
+    border-radius: 5px;
+    align-content: center;
+    padding-left: 20px;
+}
+
+.web-based a {
+    font-size: 13px;
+    color: #DDDDDD;
+    text-decoration: none;
+}
+
+.panel4 {
+    background-color: #131a22;
+    height: 370px;
+    width: 100%;
+    margin-right: 30px;
+    font-size: 12px;
+    padding-top: 50px;
+}
+
+.cont4 {
+    width: 50%;
+    display: grid;
+    grid-template-columns: repeat(7, 4fr);
+    gap: 10px;
+    margin-bottom: 20px;
+    margin-left: 320px;
+}
+
+.panel41 b {
+    color: #ffffff;
+}
+
+.panel41 {
+    color: #999999;
+    width: 30%;
+}
+.panel41:hover{
+   text-decoration: underline;
+}
+
+.copyright {
+    height: 80px;
+    width: 100%;
+}
+
+.tags {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 35px;
+}
+
+.tags a {
+    align-self: center;
+    color: white;
+    font-size: 12px;
+    text-decoration: none;
+    margin-right: 15px;
+}
+.tags a:hover{
+    text-decoration: underline;
+}
+.copy{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 10px;
+}
+.copy p{
+    align-self: center;
+    color: white;
+    font-size: 12px;
+    text-decoration: none;
 }
