@@ -1,31 +1,38 @@
-*{
+* {
     margin: 0;
     padding: 0;
     font-family: Arial, Helvetica, sans-serif;
 }
-header{
+
+header {
+    position: fixed;
     height: 60px;
     background-color: #0f1111;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
+    width: 100%;
 }
 
-.border{
+.border {
     border: 1px solid transparent;
 }
-.border:hover{
+
+.border:hover {
     border: 1px solid white;
 }
-.logo{
+
+.logo {
     margin: 1px;
     padding: 1px 8px 0px 6px;
 }
-.logo img:hover{
-   
+
+.logo img:hover {
+
     border: 1px solid white;
 }
-.location{
+
+.location {
     display: flex;
     height: 50px;
     align-items: center;
@@ -33,31 +40,38 @@ header{
     padding: 0px 9px;
     margin-right: 10px;
 }
-.location ion-icon{
+
+.location ion-icon {
     color: white;
     font-size: 18px;
-   margin: 8px 0px 0px;
+    margin: 8px 0px 0px;
 }
-.Deliver_to{
+
+.Deliver_to {
     font-size: 12px;
     color: rgb(255, 255, 255);
-    
+
 }
-.India{
+
+.India {
     font-size: 14px;
     color: white;
 }
-.location:hover{
+
+.location:hover {
     border: 1px solid white;
 }
-.searchbar{
+
+.searchbar {
     display: flex;
 }
-.searchbar:hover{
+
+.searchbar:hover {
     border: 3px solid #febd68;
     border-radius: 8px;
 }
-select{
+
+select {
     height: 40px;
     width: 52px;
     background-color: #E6E6E6;
@@ -68,14 +82,16 @@ select{
     border-bottom-left-radius: 5px;
     border: none;
 }
-.search input{
+
+.search input {
     height: 40px;
     width: 700px;
     padding: 7px 10px 10px 0px;
     font-size: 14px;
     border: none;
 }
-.searchbutton{
+
+.searchbutton {
     color: black;
     background-color: #febd68;
     border-top-right-radius: 5px;
@@ -83,81 +99,85 @@ select{
     height: 40px;
     width: 45px;
 }
-.searchbutton ion-icon{
-  font-size: 1.8rem;
- padding: 5px 5px 5px 5px;
+
+.searchbutton ion-icon {
+    font-size: 1.8rem;
+    padding: 5px 5px 5px 5px;
 }
-.sign-in{
+
+.sign-in {
     height: 50px;
     width: 115px;
     margin-left: 10px;
     padding-left: 13px;
 }
-.rando{
-        height: 50px;
-        width: 80px;
-        margin-left: 10px;
-        padding-left: 13px;
-    
+
+.rando {
+    height: 50px;
+    width: 80px;
+    margin-left: 10px;
+    padding-left: 13px;
+
 }
-.hello{
+
+.hello {
     color: #D6D6D6;
     font-size: 12px;
     margin-top: 9px;
 }
-.accounts{
+
+.accounts {
     color: #D6D6D6;
     font-size: 14px;
 }
-.cart{
+
+.cart {
     color: #D6D6D6;
     height: 50px;
     width: 84px;
     display: flex;
 }
-.cart ion-icon{
+
+.cart ion-icon {
     font-size: 3rem;
 }
-.cart p{
+
+.cart p {
     font-size: 16px;
-    align-self:flex-end;
+    align-self: flex-end;
     padding-bottom: 10px;
 }
-.panel{
+
+.panel {
     height: 40px;
     width: 100%;
     background-color: #222f3d;
     color: white;
     display: flex;
     align-items: center;
+    padding-top: 60px;
 }
-/* .all{
-    color: white;
-    display: flex;
-    margin-left: 10px;
-    align-items: center;
-    align-content: center;
-    padding: 5px 9px;;
-    height: 32px;
-    margin-bottom: 4px;
-    font-size: 14px;
-}*/
- .all ion-icon{
-   font-size: 24px;
-   height: 24px;
-   padding-left: 8px;
+
+
+.all ion-icon {
+    font-size: 24px;
+    height: 24px;
+    padding-left: 8px;
 }
-.all p{
+
+.all p {
     font-size: 14px;
     height: 14px;
-} 
-.menu{
+}
+
+.menu {
     padding-left: 11px;
     align-items: center;
     align-content: center;
     padding-left: 7px;
 }
-.all{
+
+.all {
     height: 35px;
     width: 60px;
     padding: 0px 2px 0px 4px;
@@ -165,61 +185,71 @@ select{
     align-items: center;
     align-content: center;
 }
-.contents{
+
+.contents {
     margin: 5px 0px 6px;
     height: 28px;
     align-items: center;
     align-content: center;
-    
+
 }
-.contents a{
+
+.contents a {
     color: white;
     text-decoration: none;
     font-size: 14px;
-    
+
     padding: 8px 9px;
 }
-.panel-border{
+
+.panel-border {
     border: 1px solid transparent;
 }
-.panel-border:hover{
-    border:1px solid white
+
+.panel-border:hover {
+    border: 1px solid white
 }
-.contents a:hover{
+
+.contents a:hover {
     border: 1px solid white;
 }
-.homepage{
+
+.homepage {
     background: url(images/amazon\ homepage.jpg);
     height: 600px;
     width: 100%;
     background-size: cover;
     display: flex;
 }
-.sections{
+
+.sections {
     width: 100%;
-    display: block; 
+    display: block;
     margin-top: 300px;
 }
-.label{
+
+.label {
     height: 40px;
     width: 95%;
     background-color: #f5f6f6;
-    align-self:center;
+    align-self: center;
     margin-left: 40px;
     align-content: center;
     justify-items: center;
     font-size: 14px;
-    margin-bottom: 40px;
+    margin-bottom: 10px;
 }
-.label a{
+
+.label a {
     color: #2162a1;
     text-decoration: none;
 }
-.box-container{
+
+.box-container {
     display: grid;
-    grid-template-columns: repeat(4,1fr);
+    grid-template-columns: repeat(4, 1fr);
     width: 95%;
-    align-self:center;
+    align-self: center;
     align-content: center;
     justify-items: center;
     height: 900px;
@@ -227,13 +257,47 @@ select{
     margin-left: 40px;
     gap: 40px;
 }
-.box{
+
+.box {
     height: 420px;
-    width: 327px;
+    width: 329px;
     background-color: #ffffff;
 }
-.background{
+
+.background {
     background-color: #e3e6e6;
     width: 100%;
     height: 4630px;
+}
+
+.box h2 {
+    font-family: 'Karla', 'Times New Roman', Times, serif;
+    font-weight: 750;
+    font-size: 21px;
+    color: #0f1111;
+    margin: 20px 20px 20px 20px;
+}
+.contain{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+}
+#box1 img{
+    width:150px ;
+}
+.names p{
+    font-size: 12px;
+    margin-top: 5px;
+    margin-left: 20px;
+    font-weight: 530;
+    color: #0f1111;
+    margin-bottom: 45px;
+}
+.box a{
+    color: #2162a1;
+    font-size: 13px;
+}
+.anchor{
+    margin-bottom: 15px;
+    margin-left: 15px;
+    font-weight: 545;
 }
