@@ -123,3 +123,117 @@ select{
     align-self:flex-end;
     padding-bottom: 10px;
 }
+.panel{
+    height: 40px;
+    width: 100%;
+    background-color: #222f3d;
+    color: white;
+    display: flex;
+    align-items: center;
+}
+/* .all{
+    color: white;
+    display: flex;
+    margin-left: 10px;
+    align-items: center;
+    align-content: center;
+    padding: 5px 9px;;
+    height: 32px;
+    margin-bottom: 4px;
+    font-size: 14px;
+}*/
+ .all ion-icon{
+   font-size: 24px;
+   height: 24px;
+   padding-left: 8px;
+}
+.all p{
+    font-size: 14px;
+    height: 14px;
+} 
+.menu{
+    padding-left: 11px;
+    align-items: center;
+    align-content: center;
+    padding-left: 7px;
+}
+.all{
+    height: 35px;
+    width: 60px;
+    padding: 0px 2px 0px 4px;
+    display: flex;
+    align-items: center;
+    align-content: center;
+}
+.contents{
+    margin: 5px 0px 6px;
+    height: 28px;
+    align-items: center;
+    align-content: center;
+    
+}
+.contents a{
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    
+    padding: 8px 9px;
+}
+.panel-border{
+    border: 1px solid transparent;
+}
+.panel-border:hover{
+    border:1px solid white
+}
+.contents a:hover{
+    border: 1px solid white;
+}
+.homepage{
+    background: url(images/amazon\ homepage.jpg);
+    height: 600px;
+    width: 100%;
+    background-size: cover;
+    display: flex;
+}
+.sections{
+    width: 100%;
+    display: block; 
+    margin-top: 300px;
+}
+.label{
+    height: 40px;
+    width: 95%;
+    background-color: #f5f6f6;
+    align-self:center;
+    margin-left: 40px;
+    align-content: center;
+    justify-items: center;
+    font-size: 14px;
+    margin-bottom: 40px;
+}
+.label a{
+    color: #2162a1;
+    text-decoration: none;
+}
+.box-container{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    width: 95%;
+    align-self:center;
+    align-content: center;
+    justify-items: center;
+    height: 900px;
+    width: 1250px;
+    margin-left: 40px;
+    gap: 40px;
+}
+.box{
+    height: 420px;
+    width: 327px;
+    background-color: #ffffff;
+}
+.background{
+    background-color: #e3e6e6;
+    width: 100%;
+    height: 4630px;
+}
