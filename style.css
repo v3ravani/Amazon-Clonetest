@@ -316,3 +316,44 @@ select {
 #box2 img{
     margin-left: 20px;
 }
+.backToTop{
+    height: 50px;
+    width: 100%;
+    background-color: #37475a;
+    align-content: center;
+}
+.backToTop h5{
+    text-align: center;
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 450;
+}
+.panel2{
+    height: 400px;
+    width: 100%;
+    background-color: #222f3d;
+}
+.cont{
+    display: flex;
+    margin-left: 150px;
+    margin-right: 150px;
+}
+.panel2 h4{
+    display: block;
+    color: #ffffff;
+    font-size: 16px;
+}
+ul{
+    display: block;
+    color: #DDDDDD;
+}
+.panel21 ul li{
+    font-size: 14px;
+    margin: 10px;
+}
+.panel21 ul li:hover{
+    text-decoration: underline;
+}
+.panel21{
+    margin: 50px;
+}
