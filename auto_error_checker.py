@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Universal Language-Inclusive Static Analyzer
-CI-ready | Binary-safe | Line-number aware
+Self-excluding | CI-ready | Line-number aware
 """
 
 import os
@@ -18,6 +18,9 @@ import urllib.request
 
 GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
 REPO = os.getenv("GITHUB_REPOSITORY")
+
+# 👇 Absolute path of THIS file (self-exclusion)
+SELF_FILE = os.path.abspath(__file__)
 
 # --------------------------------------------------
 # FILTERS
@@ -121,6 +124,10 @@ def hash_block(text):
 # --------------------------------------------------
 
 def analyze_file(path):
+    # 🚫 EXCLUDE THE CHECKER ITSELF
+    if os.path.abspath(path) == SELF_FILE:
+        return
+
     if is_binary(path):
         return
 
@@ -131,9 +138,8 @@ def analyze_file(path):
         return
 
     language = language_of(path)
-    content = "".join(lines)
 
-    # --- Line-by-line checks ---
+    # --- Line-level checks ---
     for idx, line in enumerate(lines, start=1):
         for rule, patterns in RULES.items():
             for p in patterns:
@@ -158,12 +164,12 @@ def analyze_file(path):
         else:
             CODE_BLOCKS[h] = path
 
-    # --- Python-specific checks ---
+    # --- Python syntax check ---
     if language == "python":
         python_syntax_check(path)
 
 # --------------------------------------------------
-# PYTHON DEAD CODE / SYNTAX
+# PYTHON CHECK
 # --------------------------------------------------
 
 def python_syntax_check(path):
