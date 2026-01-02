@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
 """
-Language-Inclusive Static Code Analyzer
-Supports multiple languages via adapters.
-Binary-safe. CI-ready. GitHub Issues integration.
+Universal Language-Inclusive Static Analyzer
+CI-ready | Binary-safe | Line-number aware
 """
 
 import os
@@ -14,14 +13,14 @@ import subprocess
 import urllib.request
 
 # --------------------------------------------------
-# 🔧 ENV
+# ENV
 # --------------------------------------------------
 
 GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
 REPO = os.getenv("GITHUB_REPOSITORY")
 
 # --------------------------------------------------
-# 📁 FILTERS
+# FILTERS
 # --------------------------------------------------
 
 IGNORED_DIRS = {
@@ -36,10 +35,6 @@ BINARY_EXTENSIONS = {
     ".ttf", ".otf", ".woff", ".woff2",
     ".mp3", ".mp4", ".avi", ".mov"
 }
-
-# --------------------------------------------------
-# 🌍 LANGUAGE MAP (EXTENSION → LANGUAGE)
-# --------------------------------------------------
 
 LANGUAGE_MAP = {
     ".py": "python",
@@ -57,75 +52,72 @@ LANGUAGE_MAP = {
 }
 
 # --------------------------------------------------
-# 🔍 RULE SETS (LANGUAGE-AGNOSTIC)
+# RULES
 # --------------------------------------------------
 
-API_KEY_PATTERNS = [
-    r"AKIA[0-9A-Z]{16}",
-    r"AIza[0-9A-Za-z\-_]{35}",
-    r"sk_live_[0-9a-zA-Z]{24}",
-    r"eyJ[a-zA-Z0-9_-]+\.eyJ",
-]
-
-PASSWORD_PATTERNS = [
-    r"password\s*=\s*['\"].+['\"]",
-    r"passwd\s*=\s*['\"].+['\"]",
-    r"pwd\s*=\s*['\"].+['\"]",
-]
-
-DANGEROUS_PATTERNS = [
-    r"os\.system",
-    r"subprocess",
-    r"exec\(",
-    r"eval\(",
-    r"Process\.run",
-    r"Runtime\.getRuntime",
-]
-
-BACKDOOR_PATTERNS = [
-    r"__import__",
-    r"compile\(",
-    r"globals\(",
-    r"base64",
-]
-
-OPEN_ENDPOINT_PATTERNS = [
-    r"0\.0\.0\.0",
-    r"app\.run\(.*debug\s*=\s*True",
-    r"listen\(\d+,\s*['\"]0\.0\.0\.0",
-]
-
-BROKEN_LOOP_PATTERNS = [
-    r"while\s*\(\s*true\s*\)",
-    r"while\s+True\s*:",
-    r"for\s*\(;;\)",
-]
+RULES = {
+    "API_KEY": [
+        r"AKIA[0-9A-Z]{16}",
+        r"AIza[0-9A-Za-z\-_]{35}",
+        r"sk_live_[0-9a-zA-Z]{24}",
+        r"eyJ[a-zA-Z0-9_-]+\.eyJ",
+    ],
+    "PASSWORD": [
+        r"password\s*=\s*['\"].+['\"]",
+        r"passwd\s*=\s*['\"].+['\"]",
+        r"pwd\s*=\s*['\"].+['\"]",
+    ],
+    "DANGEROUS": [
+        r"os\.system",
+        r"subprocess",
+        r"exec\(",
+        r"eval\(",
+        r"Process\.run",
+        r"Runtime\.getRuntime",
+    ],
+    "BACKDOOR": [
+        r"__import__",
+        r"compile\(",
+        r"globals\(",
+        r"base64",
+    ],
+    "OPEN_ENDPOINT": [
+        r"0\.0\.0\.0",
+        r"app\.run\(.*debug\s*=\s*True",
+        r"listen\(\d+,\s*['\"]0\.0\.0\.0",
+    ],
+    "BROKEN_LOOP": [
+        r"while\s*\(\s*true\s*\)",
+        r"while\s+True\s*:",
+        r"for\s*\(;;\)",
+    ],
+}
 
 # --------------------------------------------------
-# 🧠 STORAGE
+# STORAGE
 # --------------------------------------------------
 
 ERRORS = []
 CODE_BLOCKS = {}
 
 # --------------------------------------------------
-# 🔎 HELPERS
+# HELPERS
 # --------------------------------------------------
 
 def is_binary(path):
     return os.path.splitext(path.lower())[1] in BINARY_EXTENSIONS
 
-def record(msg):
-    ERRORS.append(msg)
+def language_of(path):
+    return LANGUAGE_MAP.get(os.path.splitext(path)[1].lower(), "unknown")
+
+def record(file, line, message):
+    ERRORS.append(f"{file}:{line} → {message}")
 
 def hash_block(text):
     return hashlib.sha256(text.encode("utf-8", errors="ignore")).hexdigest()
 
-def detect_language(path):
-    return LANGUAGE_MAP.get(os.path.splitext(path)[1].lower(), "unknown")
-
 # --------------------------------------------------
-# 🔍 CORE ANALYSIS (ALL LANGUAGES)
+# ANALYSIS
 # --------------------------------------------------
 
 def analyze_file(path):
@@ -134,72 +126,58 @@ def analyze_file(path):
 
     try:
         with open(path, "r", encoding="utf-8", errors="ignore") as f:
-            content = f.read()
+            lines = f.readlines()
     except Exception:
         return
 
-    language = detect_language(path)
+    language = language_of(path)
+    content = "".join(lines)
 
-    # --- Secrets ---
-    for p in API_KEY_PATTERNS:
-        if re.search(p, content):
-            record(f"[{language}] Hard-coded API key in {path}")
+    # --- Line-by-line checks ---
+    for idx, line in enumerate(lines, start=1):
+        for rule, patterns in RULES.items():
+            for p in patterns:
+                if re.search(p, line, re.IGNORECASE):
+                    record(
+                        path,
+                        idx,
+                        f"[{language}] {rule.replace('_',' ').title()} detected"
+                    )
 
-    # --- Passwords ---
-    for p in PASSWORD_PATTERNS:
-        if re.search(p, content, re.IGNORECASE):
-            record(f"[{language}] Plaintext password in {path}")
-
-    # --- Dangerous code ---
-    for p in DANGEROUS_PATTERNS:
-        if re.search(p, content):
-            record(f"[{language}] Dangerous code `{p}` in {path}")
-
-    # --- Backdoors ---
-    for p in BACKDOOR_PATTERNS:
-        if re.search(p, content):
-            record(f"[{language}] Possible backdoor pattern `{p}` in {path}")
-
-    # --- Open endpoints ---
-    for p in OPEN_ENDPOINT_PATTERNS:
-        if re.search(p, content):
-            record(f"[{language}] Open / insecure endpoint in {path}")
-
-    # --- Broken loops ---
-    for p in BROKEN_LOOP_PATTERNS:
-        if re.search(p, content):
-            record(f"[{language}] Potential infinite loop in {path}")
-
-    # --- Duplication (language-agnostic) ---
-    lines = [l.strip() for l in content.splitlines() if l.strip()]
-    if len(lines) >= 12:
-        block = "\n".join(lines[:40])
+    # --- Code duplication ---
+    stripped = [l.strip() for l in lines if l.strip()]
+    if len(stripped) >= 12:
+        block = "\n".join(stripped[:40])
         h = hash_block(block)
         if h in CODE_BLOCKS:
-            record(f"[{language}] Code duplication: {path} ↔ {CODE_BLOCKS[h]}")
+            record(
+                path,
+                1,
+                f"[{language}] Code duplication with {CODE_BLOCKS[h]}"
+            )
         else:
             CODE_BLOCKS[h] = path
 
-    # --- Language-specific hooks ---
+    # --- Python-specific checks ---
     if language == "python":
         python_syntax_check(path)
 
 # --------------------------------------------------
-# 🐍 PYTHON-SPECIFIC CHECK
+# PYTHON DEAD CODE / SYNTAX
 # --------------------------------------------------
 
 def python_syntax_check(path):
-    try:
-        subprocess.run(
-            [sys.executable, "-m", "py_compile", path],
-            stdout=subprocess.DEVNULL,
-            stderr=subprocess.PIPE,
-        )
-    except Exception:
-        record(f"[python] Syntax error in {path}")
+    result = subprocess.run(
+        [sys.executable, "-m", "py_compile", path],
+        stderr=subprocess.PIPE,
+        stdout=subprocess.DEVNULL,
+    )
+    if result.stderr:
+        msg = result.stderr.decode(errors="ignore").strip().splitlines()[-1]
+        record(path, "?", f"[python] Syntax error → {msg}")
 
 # --------------------------------------------------
-# 📂 WALK REPO
+# WALK REPO
 # --------------------------------------------------
 
 def scan_repo():
@@ -212,23 +190,20 @@ def scan_repo():
             analyze_file(path)
 
 # --------------------------------------------------
-# 🐙 GITHUB ISSUE
+# GITHUB ISSUE
 # --------------------------------------------------
 
-def create_issue(report):
+def create_issue(body):
     if not GITHUB_TOKEN or not REPO:
-        print("GitHub env missing, skipping issue creation.")
+        print("GitHub environment missing.")
         return
 
-    url = f"https://api.github.com/repos/{REPO}/issues"
-    payload = {
-        "title": "🚨 Language-Inclusive Static Analysis Report",
-        "body": report
-    }
-
     req = urllib.request.Request(
-        url,
-        data=json.dumps(payload).encode(),
+        f"https://api.github.com/repos/{REPO}/issues",
+        data=json.dumps({
+            "title": "🚨 CI Static Analysis Report (Line-Level)",
+            "body": body
+        }).encode(),
         headers={
             "Authorization": f"Bearer {GITHUB_TOKEN}",
             "Accept": "application/vnd.github+json",
@@ -241,16 +216,16 @@ def create_issue(report):
         print("Issue creation failed:", e)
 
 # --------------------------------------------------
-# 🚀 MAIN
+# MAIN
 # --------------------------------------------------
 
 if __name__ == "__main__":
     scan_repo()
 
     if ERRORS:
-        body = "## ❌ Issues Detected (Language-Inclusive Scan)\n\n"
-        body += "\n".join(f"- {e}" for e in ERRORS)
-        create_issue(body)
+        report = "## ❌ Issues Detected (with line numbers)\n\n"
+        report += "\n".join(f"- {e}" for e in ERRORS)
+        create_issue(report)
         print("Errors found. Issue created.")
         sys.exit(1)
 
